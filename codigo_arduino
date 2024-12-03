@@ -1,0 +1,55 @@
+// define os pinos dos botões e do relé
+const int botao100ml = 2;
+const int botao200ml = 3;
+const int botao350ml = 4;
+const int relePin = 5;
+
+// define os tempos para liberar água (em milissegundos)
+const unsigned long tempo100ml = 11050;  // ajuste para a quantidade certa
+const unsigned long tempo200ml = 22500;
+const unsigned long tempo350ml = 41100;
+
+void setup() {
+  // configura os pinos dos botões como entradas
+  pinMode(botao100ml, INPUT_PULLUP);
+  pinMode(botao200ml, INPUT_PULLUP);
+  pinMode(botao350ml, INPUT_PULLUP);
+
+  // configura o pino do relé como saída
+  pinMode(relePin, OUTPUT); 
+  
+  // inicializa o relé desligado (válvula fechada)
+  digitalWrite(relePin, LOW);
+}
+
+void loop() {
+  // verifica se o botão de 100ml foi pressionado
+  if (digitalRead(botao100ml) == LOW) {
+    liberarAgua(tempo100ml);
+    delay(50);
+  }
+
+  // verifica se o botão de 200ml foi pressionado
+  if (digitalRead(botao200ml) == LOW) {
+    liberarAgua(tempo200ml);
+    delay(50);
+  }
+
+  // verifica se o botão de 350ml foi pressionado
+  if (digitalRead(botao350ml) == LOW) {
+    liberarAgua(tempo350ml);
+    delay(50);
+  }
+}
+
+// Função para abrir a válvula e liberar água
+void liberarAgua(unsigned long tempo) {
+  // Aciona o relé (abrir válvula)
+  digitalWrite(relePin, HIGH);
+  
+  // Aguarda pelo tempo especificado
+  delay(tempo);
+  
+  // Desliga o relé (fechar válvula)
+  digitalWrite(relePin, LOW);
+}
