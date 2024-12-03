@@ -42,14 +42,14 @@ void loop() {
   }
 }
 
-// Função para abrir a válvula e liberar água
+// função para abrir a válvula e liberar água
 void liberarAgua(unsigned long tempo) {
-  // Aciona o relé (abrir válvula)
+  // aciona o relé (abrir válvula)
   digitalWrite(relePin, HIGH);
   
-  // Aguarda pelo tempo especificado
+  // aguarda pelo tempo especificado
   delay(tempo);
   
-  // Desliga o relé (fechar válvula)
+  // desliga o relé (fechar válvula)
   digitalWrite(relePin, LOW);
 }
